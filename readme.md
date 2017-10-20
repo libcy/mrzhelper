@@ -1,4 +1,4 @@
-#MRZ Helper
+# MRZ Helper
 
 This is a GUI fortran input file generator I wrote during my internship in PetroChina (I've already obtained a permission for sharing this app). It can be used directly in a browser but works better with an [Electron](https://github.com/electron/electron) wrapper. Its main features include:
 
