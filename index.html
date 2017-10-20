@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<meta name="format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="viewport" content="user-scalable=no">
+<link rel="stylesheet" href="index.css">
+<body onload="init()">
+    <script type="text/javascript" src="lz-string.min.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+    <div id="general" class="block" oncontextmenu="toggleScroll(this)">
+        <div class="title">Parameter</div>
+        <div>
+            Unit
+            <select name="unit" onchange="changeUnit()">
+                <option value="m">m</option>
+                <option value="cm">cm</option>
+                <option value="mm">mm</option>
+                <option value="ft">ft</option>
+                <option value="inch">in</option>
+            </select>
+        </div>
+        <div>
+            Radial grid length /<span class="unit"></span>
+            <input type="text" name="deltar">
+        </div>
+        <div>
+            Radial grid stretch
+            <input type="text" name="expand">
+        </div>
+        <div>
+            Radial grid stretch begin
+            <input type="text" name="jexpand1">
+        </div>
+        <div>
+            Radial grid stretch end
+            <input type="text" name="jexpand2">
+        </div>
+        <div>
+            Axial grid length /<span class="unit"></span>
+            <input type="text" name="deltaz">
+        </div>
+        <div>
+            Duration / s
+            <input type="text" name="tmax">
+        </div>
+        <div class="placeholder"></div>
+        <div>
+            Source mode
+            <select name="mode">
+                <option value="0">monopole</option>
+                <option value="1">dipole</option>
+            </select>
+        </div>
+        <div>
+            Source time function
+            <select name="ipulse">
+                <option value="-1">-1</option>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+        <div>
+            Source type
+            <select name="srcfld">
+                <option value="p">p</option>
+                <option value="taurr">taurr</option>
+                <option value="tauzz">tauzz</option>
+                <option value="taurz">taurz</option>
+                <option value="vr">vr</option>
+                <option value="vz">vz</option>
+            </select>
+        </div>
+        <div>
+            Radial source index /<span class="unit"></span>
+            <input type="text" onblur="generatePreview()" name="srcj">
+        </div>
+        <div>
+            Axial source index /<span class="unit"></span>
+            <input type="text" onblur="generatePreview()" name="srck">
+        </div>
+        <div>
+            Period / s
+            <input type="text" name="period">
+        </div>
+        <div>
+            Centrual frequency / kHz
+            <input type="text" name="centfreq">
+        </div>
+        <div class="placeholder"></div>
+        <div>
+            Receiver type
+            <select name="rcvrfld">
+                <option value="p">p</option>
+                <option value="taurr">taurr</option>
+                <option value="tauzz">tauzz</option>
+                <option value="taurz">taurz</option>
+                <option value="vr">vr</option>
+                <option value="vz">vz</option>
+            </select>
+        </div>
+        <div>
+            Extra receiver types
+            <input type="text" onblur="generatePreview()" name="rcvrfld2">
+        </div>
+        <div>
+            Receiver number
+            <input type="text" onblur="generatePreview()" name="numrcvrs">
+        </div>
+        <div>
+            Radial position /<span class="unit"></span>
+            <input type="text" onblur="generatePreview()" name="rcvrloc1">
+        </div>
+        <div>
+            Axial receiver interval /<span class="unit"></span>
+            <input type="text" onblur="generatePreview()" name="rcvrspacing">
+        </div>
+        <div>
+            Axial receiver begin /<span class="unit"></span>
+            <input type="text" onblur="generatePreview()" name="rcvrloc2">
+        </div>
+        <div>
+            Sample interval / s
+            <input type="text" name="dtrec">
+        </div>
+        <div>
+            Generate snapshot
+            <select name="pictures">
+                <option value="0">off</option>
+                <option value="1">on</option>
+            </select>
+        </div>
+        <div>
+            Snapshot interval
+            <input type="text" name="nsnap">
+        </div>
+        <div class="placeholder"></div>
+        <div>
+            Boundary conditions
+            <select name="lindbc">
+                <option value="0">Liao</option>
+                <option value="1">Lindman</option>
+            </select>
+        </div>
+        <div>
+            Symmetry conditions
+            <select name="zerosym">
+                <option value="0">无</option>
+                <option value="1">有</option>
+            </select>
+        </div>
+        <div>
+            Liao boundary speed
+            <select name="liaospeed">
+                <option value="0">VP</option>
+                <option value="1">VS</option>
+                <option value="2">Avarage</option>
+            </select>
+        </div>
+        <div>
+            Liao stability parameter
+            <input type="text" name="twang">
+        </div>
+    </div>
+
+    <div id="model" class="block" oncontextmenu="toggleScroll(this)">
+        <div class="title">Model</div>
+        <div class="add material">
+            <input type="button" value="Add material" onclick="addMaterialButton()">
+        </div>
+        <div class="toggle material">
+            Density
+            <input type="text" class="toggle material" name="rho">
+        </div>
+        <div class="toggle material">
+            VP
+            <input type="text" class="toggle material" name="vc">
+        </div>
+        <div class="toggle material">
+            VS
+            <input type="text" class="toggle material" name="vs">
+        </div>
+        <div class="toggle material">
+            Attenuation
+            <input type="text" class="toggle material" name="q">
+        </div>
+        <div class="toggle material">
+            Description
+            <input type="text" class="toggle material" name="des">
+        </div>
+        <div class="toggle material">
+            Color
+            <input type="text" class="toggle material" name="clr">
+        </div>
+        <div class="toggle material confirm">
+            <input type="button" value="Confirm" onclick="materialConfirm()">
+            <input type="button" value="Cancel" onclick="materialCancel()">
+        </div>
+        <div class="placeholder"></div>
+        <div class="add region">
+            <input type="button" value="Add region" onclick="addRegionButton()">
+            <input type="button" style="margin-left:-18px" value="Adjust region" onclick="moveRegion()">
+        </div>
+        <div class="toggle region">
+            Axial begin /<span class="unit"></span>
+            <input type="text" class="toggle region" name="zs">
+        </div>
+        <div class="toggle region">
+            Axial end /<span class="unit"></span>
+            <input type="text" class="toggle region" name="ze">
+        </div>
+        <div class="toggle region">
+            Radial begin /<span class="unit"></span>
+            <input type="text" class="toggle region" name="rs">
+        </div>
+        <div class="toggle region">
+            Radial end /<span class="unit"></span>
+            <input type="text" class="toggle region" name="re">
+        </div>
+        <div class="toggle region">
+            Batch add
+            <input type="text" class="toggle region" name="ba">
+        </div>
+        <div class="toggle region">
+            Description
+            <input type="text" class="toggle region" name="rdes">
+        </div>
+        <div class="toggle region">
+            Material
+            <select class="toggle region" name="regionmaterial"></select>
+        </div>
+        <div class="toggle region confirm">
+            <input type="button" value="Confirm" onclick="regionConfirm()">
+            <input type="button" value="Cancel" onclick="regionCancel()">
+        </div>
+        <div class="toggle move">
+            Radial translate /<span class="unit"></span>
+            <input type="text" class="toggle region" name="dr">
+        </div>
+        <div class="toggle move">
+            Axial translate /<span class="unit"></span>
+            <input type="text" class="toggle region" name="dz">
+        </div>
+        <div class="toggle move">
+            Custom command
+            <input type="text" class="toggle region" name="cmd">
+        </div>
+        <div class="toggle move">
+            Change material <select name="changem"></select>
+        </div>
+        <div class="toggle move confirm">
+            <input type="button" value="Select all" onclick="moveSelectAll()">
+            <input type="button" value="Invert selection" onclick="moveInvertSelect()">
+            <input type="button" value="Reselect" onclick="moveCancelSelect()">
+        </div>
+        <div class="toggle move confirm">
+            <input type="button" value="Confirm" onclick="moveConfirm()">
+            <input type="button" value="Cancel" onclick="moveCancel()">
+            <input type="button" value="Delete" onclick="moveDelete()">
+        </div>
+    </div>
+    <div id="preview" class="block">
+        <div class="title">Preview</div>
+        <div id="modelpreview"></div>
+        <div id="modelpreview2"></div>
+        <div id="export">
+        <input type="button" value="save" oncontextmenu="exportConfig()" onclick="saveConfig(this)">
+        <input type="button" value="reset" onclick="clearConfig()">
+        <input type="button" value="import">
+        <input type="button" value="export" onclick="exportData()">
+        <input type="file" value="export" onchange="importData.call(this)">
+        </div>
+    </div>
+    <div id="pop"><div>rmin: <span></span></div><div>rmax: <span></span></div><div>zmin: <span></span></div><div>zmax: <span></span></div></div>
+</body>

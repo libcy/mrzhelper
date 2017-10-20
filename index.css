@@ -1,0 +1,243 @@
+html{
+    color: rgb(60,60,60);
+    text-align: center;
+    cursor: default;
+    -webkit-user-select:none;
+    -webkit-tap-highlight-color:transparent;
+    font-size: 16px;
+    font-family:'STHeiti','SimHei','Microsoft JhengHei','Microsoft YaHei','WenQuanYi Micro Hei',Helvetica,Arial,sans-serif
+}
+html,body{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(228, 228, 228);
+    overflow: hidden;
+}
+.block{
+    width: calc(100% / 3 - 2px - 40px / 3);
+    height: calc(50% - 17px);
+    text-align: left;
+    position: absolute;
+    border: 1px dashed rgb(160,160,160);
+    border-radius: 8px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+#general{
+    left:10px;
+    top:10px;
+    height: calc(100% - 22px);
+}
+#source{
+    left:10px;
+    bottom:10px;
+}
+#material{
+    left: calc(100% / 3 + 20px - 40px / 3);
+    top:10px;
+}
+#model{
+    left: calc(100% / 3 + 20px - 40px / 3);
+    top:10px;
+    height: calc(100% - 22px);
+}
+/*#model{
+    left: calc(200% / 3 + 30px - 80px / 3);
+    top:10px;
+}*/
+#preview{
+    left: calc(200% / 3 + 30px - 80px / 3);
+    top:10px;
+    height: calc(100% - 22px);
+    overflow: hidden;
+}
+.block>div{
+    width: calc(100% - 20px);
+    height: 25px;
+    line-height: 25px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    margin-left: 20px;
+    white-space: nowrap;
+}
+.block>div.placeholder{
+    height: 0;
+    width: calc(100% - 40px);
+    margin-top: 9px;
+    margin-bottom: 8px;
+    border-top: 1px dashed rgb(160,160,160);
+}
+.block>div.title{
+    font-size: 24px;
+    margin-top: 15px;
+    margin-bottom: 9px;
+}
+.block>table{
+    width: calc(100% - 20px);
+    left: 10px;
+    position: relative;
+}
+.invert-color{
+    -webkit-filter:invert(0.8);
+    z-index: 10;
+}
+.highlight>div:not(.selected){
+    opacity: 0.5;
+}
+.highlight>.selected{
+    -webkit-filter:brightness(1.5);
+}
+.invert-color2{
+    -webkit-filter:brightness(1.5) invert(0.2);
+    z-index: 9;
+}
+.red{
+    color: red !important;
+}
+.selectnode{
+    border:1px dashed black;
+    box-shadow: white 0 0 3px;
+    position: absolute;
+    border-radius: 4px;
+    z-index: 50;
+}
+select,input{
+    width: 60px;
+    height: 25px;
+    float: right;
+    margin-right: 20px;
+}
+input[type="text"]{
+    width: 56px;
+    height: 19px;
+}
+input[type="button"]:last-child{
+    margin-right: 5px;
+}
+.add>input[type="button"]{
+    float: none;
+    width: 80px;
+}
+.toggle>input[type="button"]{
+    float: none;
+}
+.toggle>input[type="button"]:not(*:first-child){
+    margin-left: -20px;
+}
+#export>input[type="button"]{
+    float: none;
+    margin-left: 1px;
+    margin-right: 1px;
+    width: 52px;
+}
+#export{
+    white-space: nowrap;
+    text-align: center;
+    margin-left: 0;
+    width: 100%;
+}
+#modelpreview{
+    width: calc(100% - 40px);
+    height: calc(100% - 115px);
+    margin: 20px
+}
+#modelpreview2{
+    width: calc(100% - 40px);
+    height: calc(100% - 120px);
+    left: 20px;
+    top:60px;
+    margin: 0;
+    position: absolute;
+    /*transition: width 0.2s, height 0.2s, left 0.2s, top 0.2s;*/
+}
+#modelpreview2>div{
+    position: absolute;
+    transition: all 0.3s;
+}
+#modelpreview2>.source,
+#modelpreview2>.receiver{
+    width: 4px;
+    height: 4px;
+    border-radius: 100%;
+    background: #FF0000;
+    z-index: 15;
+    transform: translate(-2px,-2px);
+    background: red;
+    /*border: 1px solid red;*/
+}
+#modelpreview2>.receiver{
+    background: green;
+    /*border: 1px solid green;*/
+}
+td>input{
+    float: none;
+    margin: 0;
+}
+.unit{
+    margin-left: 7px;
+}
+div:not(.editing-material)>div.toggle.material{
+    display: none;
+}
+div:not(.editing-region)>div.toggle.region{
+    display: none;
+}
+div:not(.editing-move)>div.toggle.move{
+    display: none;
+}
+div.editing-material>.add.material{
+    display: none;
+}
+div.editing-region>.add.region{
+    display: none;
+}
+div.editing-move>.add.region{
+    display: none;
+}
+.block>div.toggle{
+    margin-left: 30px;
+    width: calc(100% - 30px);
+}
+#preview.zoomed>div:not(#modelpreview2){
+    opacity: 0;
+    pointer-events: none;
+}
+#preview>div{
+    /*transition: all 0.3s;*/
+}
+#pop{
+    position: fixed;
+    box-shadow: rgba(0,0,0,0.1) 0 0 0 1px,rgba(0,0,0,0.3) 0 0 5px;
+    background: rgba(228, 228, 228,0.9);
+    border-radius: 4px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: left;
+    left: auto;
+    right: calc(100% / 3 + 20px - 40px / 3 - 20px);
+    top: calc(50% - 107px / 2);
+    transition: opacity 0.2s;
+}
+#pop:not(.shown){
+    opacity: 0;
+    pointer-events: none;
+}
+#pop>div{
+    margin-bottom: 5px;
+}
+input[type="file"]{
+    position: absolute;
+    width: 52px;
+    left: calc(50% + 3px);
+    opacity: 0;
+    margin: 0;
+    overflow: hidden;
+}
+::-webkit-scrollbar{
+    display: none;
+}
